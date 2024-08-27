@@ -10,8 +10,17 @@
     "astro": "astro"
   },
   "dependencies": {
-    "astro": "^4.14.5",
     "@astrojs/check": "^0.9.3",
+    "@astrojs/sitemap": "^3.1.6",
+    "@astrolib/seo": "^1.0.0-beta.5",
+    "astro": "^4.14.5",
+    "astro-icon": "^1.1.1",
+    "astro-purgecss": "^4.4.1",
+    "astro-webmanifest": "^1.0.0",
+    "purgecss": "^6.0.0",
     "typescript": "^5.5.4"
+  },
+  "devDependencies": {
+    "@iconify-json/ic": "^1.1.18"
   }
 }
