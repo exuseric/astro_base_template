@@ -1,4 +1,7 @@
 :root {
+
+  --clr-accent-400: #f59e0b;
+
   --clr-neutral-50: #fafafa;
   --clr-neutral-100: #f5f5f5;
   --clr-neutral-200: #e5e5e5;
@@ -150,6 +153,7 @@ img,
 picture,
 svg {
   max-width: 100%;
+  height: auto;
   display: block;
 }
 
@@ -227,23 +231,7 @@ button {
   cursor: pointer;
 }
 
-button[data-type="icon"] {
-  position: relative;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  padding: 0.2em;
-  width: 1.5em;
-  height: 1.5em;
 
-  font-size: var(--fs-2xl);
-}
-
-button[data-type="icon"]>svg {
-  position: absolute;
-  inset: 50%;
-  translate: -50% -50%;
-}
 
 button[aria-expanded="false"] .menu-icon,
 button[aria-expanded="true"] .close-icon {
@@ -254,3 +242,169 @@ button[aria-expanded="false"] .close-icon,
 button[aria-expanded="true"] .menu-icon {
   display: none;
 }
+
+
+/*
+  Start of Navigation Styles
+*/
+/* Large screen styles: No inheritance from mobile styles */
+@media (min-width: 50em) {
+
+  .primary-nav {
+    grid-auto-flow: column;
+    background-color: var(--clr-neutral-50);
+    padding-block: var(--spacing-2);
+  }
+
+  .primary-nav-menu-toggle,
+  .primary-nav-menu-toggle[data-visible] {
+    display: none;
+  }
+
+  .primary-nav-actions {
+    width: max-content;
+  }
+
+  .primary-nav-wrapper {
+    display: flex;
+    flex-flow: row wrap;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  .primary-nav-menu-list {
+    display: flex;
+    flex-flow: row wrap;
+    align-items: center;
+    justify-content: flex-end;
+    gap: var(--spacing-1);
+  }
+
+  .primary-nav-menu-list a {
+    display: block;
+    height: 100%;
+
+    padding: var(--spacing-3) var(--spacing-6);
+    text-decoration: none;
+    font-weight: 500;
+
+    background-color: var(--clr-neutral-50);
+  }
+
+  .primary-nav-menu-list a:hover,
+  .primary-nav-menu-list a:focus {
+    color: var(--clr-neutral-50);
+    background-color: var(--clr-accent-400);
+  }
+}
+
+/* Mobile styles: No inheritance from large screen styles */
+/* Breaks mobile first rule */
+@media (max-width: 50em) {
+  .primary-nav {
+    position: sticky;
+    grid-auto-flow: row;
+    background-color: var(--clr-neutral-50);
+  }
+
+  .primary-nav[data-overlay]::before {
+    content: "";
+    position: fixed;
+    inset: 0;
+    transition: background-image 0.2s ease-in-out;
+    transition-delay: 0.2s;
+    background-image: linear-gradient(to bottom, rgb(0 0 0 / 0) 0%, rgb(0 0 0 / 0.45));
+  }
+
+  @supports (backdrop-filter: blur(1rem)) {
+    .primary-nav[data-overlay]::before {
+      backdrop-filter: blur(1rem);
+    }
+  }
+
+  .primary-nav-actions {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    z-index: 2;
+    padding-block: var(--spacing-2);
+  }
+
+  .primary-nav-actions .logo {
+    position: relative;
+    display: flex;
+    flex-flow: row wrap;
+    align-items: center;
+    justify-content: flex-start;
+
+    max-height: 90%;
+    width: auto;
+  }
+
+  .primary-nav-actions .logo img {
+    position: relative;
+    object-fit: contain;
+    object-position: center;
+    max-height: var(--spacing-12);
+  }
+
+
+  .primary-nav-menu {
+    display: none;
+    position: absolute;
+    inset: var(--spacing-20) 0 auto;
+
+    width: 100%;
+    max-width: 95vw;
+    padding: var(--spacing-4) 0;
+    margin: 0 auto;
+
+    background-color: var(--clr-neutral-50);
+
+    border-radius: var(--spacing-2);
+
+    box-shadow: var(--shadow-sm);
+  }
+
+  .primary-nav-menu[data-visible] {
+    display: block;
+  }
+
+  .primary-nav-menu-list {
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-4);
+
+    list-style-type: none;
+    text-align: center;
+  }
+
+  .primary-nav-menu-list a {
+    display: block;
+    padding: var(--spacing-3);
+    text-decoration: none;
+  }
+
+  .primary-nav-menu-toggle {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0.2em;
+    width: 1.5em;
+    height: 1.5em;
+
+    font-size: var(--fs-2xl);
+  }
+
+  .primary-nav-menu-toggle>svg {
+    position: absolute;
+    inset: 50%;
+    translate: -50% -50%;
+  }
+}
+
+/* 
+  End of Navigation Styles 
+*/

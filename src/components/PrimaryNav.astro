@@ -11,87 +11,45 @@ const links = [
 ---
 
 <header class="primary-nav content-grid">
-  <div class="primary-nav-actions">
-    <a class="logo" href="/">
-      <img src="src/assets/logo.svg" alt="Logo" />
-    </a>
-    <button
-      class="primary-nav-menu-toggle button"
-      aria-label="Menu Toggle"
-      aria-expanded="false"
-      aria-controls="primary-nav-menu"
-      data-type="icon"
-    >
-      <span class="visually-hidden">Menu</span>
-      <Icon name="ic:baseline-menu" class="menu-icon" />
-      <Icon name="ic:baseline-close" class="close-icon" />
-    </button>
+  <div class="primary-nav-wrapper">
+    <div class="primary-nav-actions">
+      <a class="logo" href="/">
+        <img src="src/assets/logo.svg" alt="Logo" />
+      </a>
+      <button
+        class="primary-nav-menu-toggle button"
+        aria-label="Menu Toggle"
+        aria-expanded="false"
+        aria-controls="primary-nav-menu"
+        data-type="icon"
+      >
+        <span class="visually-hidden">Menu</span>
+        <Icon name="ic:baseline-menu" class="menu-icon" />
+        <Icon name="ic:baseline-close" class="close-icon" />
+      </button>
+    </div>
+    <nav class="primary-nav-menu" id="primary-nav-menu">
+      <ul class="primary-nav-menu-list" role="list">
+        {
+          links.map((link) => (
+            <li>
+              <a href={link.href}>{link.label}</a>
+            </li>
+          ))
+        }
+      </ul>
+    </nav>
   </div>
-
-  <nav class="primary-nav-menu" id="primary-nav-menu">
-    <ul class="primary-nav-menu-list" role="list">
-      {
-        links.map((link) => (
-          <li>
-            <a href={link.href}>{link.label}</a>
-          </li>
-        ))
-      }
-    </ul>
-  </nav>
 </header>
-
-<style>
-  @media (max-width: 50em) {
-    .primary-nav {
-      position: relative;
-      padding-block: var(--spacing-2);
-      grid-auto-flow: row;
-    }
-
-    .primary-nav-actions {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-    }
-
-    .primary-nav-menu {
-      display: none;
-      position: absolute;
-      inset: var(--spacing-16) 0 auto;
-      background-color: var(--clr-neutral-100);
-      border: 1px solid var(--clr-neutral-200);
-      padding: var(--spacing-4) 0;
-      border-radius: var(--spacing-2);
-      box-shadow: var(--shadow-sm);
-    }
-
-    .primary-nav-menu[data-visible] {
-      display: block;
-    }
-
-    .primary-nav-menu-list {
-      display: flex;
-      flex-direction: column;
-      gap: var(--spacing-4);
-
-      list-style-type: none;
-    }
-
-    .primary-nav-menu-list a {
-      display: block;
-      padding: var(--spacing-3);
-      text-decoration: none;
-    }
-  }
-</style>
 
 <script>
   const menuToggle = document.querySelector(".primary-nav-menu-toggle");
-  const menu = document.querySelector(".primary-nav-menu");
+  const primaryMenu = document.querySelector(".primary-nav-menu");
+  const primaryHeader = document.querySelector(".primary-nav");
 
   menuToggle?.addEventListener("click", () => {
-    menu?.toggleAttribute("data-visible");
+    primaryMenu?.toggleAttribute("data-visible");
+    primaryHeader?.toggleAttribute("data-overlay");
     menuToggle.setAttribute(
       "aria-expanded",
       String(menuToggle.getAttribute("aria-expanded") !== "true")
