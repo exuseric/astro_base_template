@@ -1,0 +1,6 @@
+{
+  "sonarlint.connectedMode.project": {
+    "connectionId": "exuseric",
+    "projectKey": "exuseric_astro_base_template"
+  }
+}
